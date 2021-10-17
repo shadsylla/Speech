@@ -1,0 +1,103 @@
+<!Doctype html> 
+<header> 
+
+</header>
+<body>
+
+
+   <textarea id="text"> </textarea>
+    <label for="speed"> </label>
+    <input type="number" id="speed" min=".7" max="4"
+     step=".5" value="1" > 
+
+
+    <button id="play-btn"> Play </button> 
+    <button id="pause-btn"> Pause </button> 
+    <button id="stop-btn"> Stop </button> 
+    <button id="clear-btn"> Clear </button> 
+
+
+    <style>
+        body {
+            width: 90%;
+            margin: auto;
+            margin-top: 1rem;
+        }
+
+        #text {
+            width: 100%;
+            height: 50vh;
+        }
+
+        button {
+            border-radius: 1rem;
+            text-align: center;
+
+        }
+
+        textarea {
+            border: 5px solid black;
+        }
+    </style>
+
+
+  <script>
+
+       const playButton = document.getElementById('play-btn')
+       const pauseButton = document.getElementById('pause-btn')
+       const stopButton = document.getElementById('stop-btn')
+       const clearButton = document.getElementById('clear-btn')
+       const textInput = document.getElementById('text')
+       const speedInput = document.getElementById('speed')
+      // function play button 
+
+      playButton.addEventListener('click', () => {
+      
+         // this is the functionality of Play Btn
+        playSpeech(text.value)
+        })
+
+      pauseButton.addEventListener('click', pauseSpeech)
+      stopButton.addEventListener('click',  stopSpeech )
+      clearButton.addEventListener('click', clearText)
+
+
+    function playSpeech(text) {
+       if(speechSynthesis.paused && speechSynthesis.speaking) {
+           return speechSynthesis.resume()
+       }
+        const shadSpeak = new SpeechSynthesisUtterance(text)
+        shadSpeak.rate = speedInput.value || 1 
+        speechSynthesis.speak(shadSpeak)
+    }   
+  
+
+// if click on Pause. Stop on your track. Then if click on Play, resume. 
+
+     function pauseSpeech(){
+
+         if(speechSynthesis.speaking) speechSynthesis.pause()
+
+     }
+    function stopSpeech() {
+       speechSynthesis.resume()
+       speechSynthesis.cancel()
+    }
+  
+    function clearText() {
+       stopSpeech()
+
+        textInput.value = '' 
+        
+    }
+
+
+</script>
+
+  
+
+
+
+    </body>
+
+</html> 
